@@ -62,8 +62,8 @@ public class MaterialDialog extends BaseAlertDialog<MaterialDialog> {
     }
 
     @Override
-    public void setUiBeforShow() {
-        super.setUiBeforShow();
+    public void setUiBeforeShow() {
+        super.setUiBeforeShow();
         /**set background color and corner radius */
         float radius = dp2px(cornerRadius_DP);
         ll_container.setBackgroundDrawable(CornerUtils.cornerDrawable(bgColor, radius));

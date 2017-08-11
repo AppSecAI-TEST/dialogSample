@@ -88,8 +88,8 @@ public class NormalDialog extends BaseAlertDialog<NormalDialog> {
     }
 
     @Override
-    public void setUiBeforShow() {
-        super.setUiBeforShow();
+    public void setUiBeforeShow() {
+        super.setUiBeforeShow();
 
         /** title */
         if (style == STYLE_ONE) {

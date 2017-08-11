@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cc.sivin.dialoglib.dialog.entity.DialogMenuItem;
-import cc.sivin.dialoglib.dialog.listener.OnOperItemClickL;
+import cc.sivin.dialoglib.dialog.listener.SheetItemClickListener;
 import cc.sivin.dialoglib.dialog.utils.CornerUtils;
 import cc.sivin.dialoglib.dialog.widget.base.BottomBaseDialog;
 
@@ -31,7 +31,7 @@ import cc.sivin.dialoglib.dialog.widget.base.BottomBaseDialog;
 /***
  * Dialog like iOS ActionSheet(iOS风格对话框)
  */
-public class ActionSheetDialog extends BottomBaseDialog {
+public class SheetDialog extends BottomBaseDialog {
     /**
      * ListView
      */
@@ -117,20 +117,20 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * operation items(操作items)
      */
     private ArrayList<DialogMenuItem> contents = new ArrayList<DialogMenuItem>();
-    private OnOperItemClickL onOperItemClickL;
+    private SheetItemClickListener onOperItemClickL;
     private LayoutAnimationController lac;
 
-    public void setOnOperItemClickL(OnOperItemClickL onOperItemClickL) {
+    public void setOnOperItemClickL(SheetItemClickListener onOperItemClickL) {
         this.onOperItemClickL = onOperItemClickL;
     }
 
-    public ActionSheetDialog(Context context, ArrayList<DialogMenuItem> baseItems, View animateView) {
+    public SheetDialog(Context context, ArrayList<DialogMenuItem> baseItems, View animateView) {
         super(context, animateView);
         this.contents.addAll(baseItems);
         init();
     }
 
-    public ActionSheetDialog(Context context, String[] items, View animateView) {
+    public SheetDialog(Context context, String[] items, View animateView) {
         super(context, animateView);
         this.contents = new ArrayList<DialogMenuItem>();
         for (String item : items) {
@@ -140,7 +140,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
         init();
     }
 
-    public ActionSheetDialog(Context context, BaseAdapter adapter, View animateView) {
+    public SheetDialog(Context context, BaseAdapter adapter, View animateView) {
         super(context, animateView);
         this.adapter = adapter;
         init();
@@ -205,7 +205,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
     }
 
     @Override
-    public void setUiBeforShow() {
+    public void setUiBeforeShow() {
         /** title */
         float radius = dp2px(cornerRadius_DP);
         tv_title.setHeight(dp2px(titleHeight));
@@ -255,7 +255,7 @@ public class ActionSheetDialog extends BottomBaseDialog {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (onOperItemClickL != null) {
-                    onOperItemClickL.onOperItemClick(parent, view, position, id);
+                    onOperItemClickL.onItemClick(parent, view, position, id);
                 }
             }
         });
@@ -267,9 +267,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set title background color(设置标题栏背景色)
      *
      * @param titleBgColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog titleBgColor(int titleBgColor) {
+    public SheetDialog titleBgColor(int titleBgColor) {
         this.titleBgColor = titleBgColor;
         return this;
     }
@@ -278,9 +278,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set title text(设置标题内容)
      *
      * @param title
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog title(String title) {
+    public SheetDialog title(String title) {
         this.title = title;
         return this;
     }
@@ -289,9 +289,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set titleHeight(设置标题高度)
      *
      * @param titleHeight
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog titleHeight(float titleHeight) {
+    public SheetDialog titleHeight(float titleHeight) {
         this.titleHeight = titleHeight;
         return this;
     }
@@ -300,9 +300,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set title textsize(设置标题字体大小)
      *
      * @param titleTextSize_SP
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog titleTextSize_SP(float titleTextSize_SP) {
+    public SheetDialog titleTextSize_SP(float titleTextSize_SP) {
         this.titleTextSize_SP = titleTextSize_SP;
         return this;
     }
@@ -311,9 +311,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set title textcolor(设置标题字体颜色)
      *
      * @param titleTextColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog titleTextColor(int titleTextColor) {
+    public SheetDialog titleTextColor(int titleTextColor) {
         this.titleTextColor = titleTextColor;
         return this;
     }
@@ -322,9 +322,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * enable title show(设置标题是否显示)
      *
      * @param isTitleShow
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog isTitleShow(boolean isTitleShow) {
+    public SheetDialog isTitleShow(boolean isTitleShow) {
         this.isTitleShow = isTitleShow;
         return this;
     }
@@ -333,9 +333,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set ListView background color(设置ListView背景)
      *
      * @param lvBgColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog lvBgColor(int lvBgColor) {
+    public SheetDialog lvBgColor(int lvBgColor) {
         this.lvBgColor = lvBgColor;
         return this;
     }
@@ -344,9 +344,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set corner radius(设置圆角程度,单位dp)
      *
      * @param cornerRadius_DP
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog cornerRadius(float cornerRadius_DP) {
+    public SheetDialog cornerRadius(float cornerRadius_DP) {
         this.cornerRadius_DP = cornerRadius_DP;
         return this;
     }
@@ -355,9 +355,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set divider color(ListView divider颜色)
      *
      * @param dividerColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog dividerColor(int dividerColor) {
+    public SheetDialog dividerColor(int dividerColor) {
         this.dividerColor = dividerColor;
         return this;
     }
@@ -365,9 +365,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
     /**
      * set divider height(ListView divider高度)
      *
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog dividerHeight(float dividerHeight_DP) {
+    public SheetDialog dividerHeight(float dividerHeight_DP) {
         this.dividerHeight_DP = dividerHeight_DP;
         return this;
     }
@@ -376,9 +376,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set item press color(item按住颜色)
      *
      * @param itemPressColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog itemPressColor(int itemPressColor) {
+    public SheetDialog itemPressColor(int itemPressColor) {
         this.itemPressColor = itemPressColor;
         return this;
     }
@@ -387,9 +387,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set item textcolor(item字体颜色)
      *
      * @param itemTextColor
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog itemTextColor(int itemTextColor) {
+    public SheetDialog itemTextColor(int itemTextColor) {
         this.itemTextColor = itemTextColor;
         return this;
     }
@@ -398,9 +398,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set item textsize(item字体大小)
      *
      * @param itemTextSize_SP
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog itemTextSize(float itemTextSize_SP) {
+    public SheetDialog itemTextSize(float itemTextSize_SP) {
         this.itemTextSize_SP = itemTextSize_SP;
         return this;
     }
@@ -409,9 +409,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set item height(item高度)
      *
      * @param itemHeight_DP
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog itemHeight(float itemHeight_DP) {
+    public SheetDialog itemHeight(float itemHeight_DP) {
         this.itemHeight_DP = itemHeight_DP;
         return this;
     }
@@ -432,9 +432,9 @@ public class ActionSheetDialog extends BottomBaseDialog {
      * set layoutAnimation(设置layout动画 ,传入null将不显示layout动画)
      *
      * @param lac
-     * @return ActionSheetDialog
+     * @return SheetDialog
      */
-    public ActionSheetDialog layoutAnimation(LayoutAnimationController lac) {
+    public SheetDialog layoutAnimation(LayoutAnimationController lac) {
         this.lac = lac;
         return this;
     }
@@ -489,7 +489,6 @@ public class ActionSheetDialog extends BottomBaseDialog {
             tv_item.setText(item.operName);
             tv_item.setTextColor(item.textColor);
             iv_item.setVisibility(item.resId == 0 ? View.GONE : View.VISIBLE);
-
             return ll_item;
         }
     }

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cc.sivin.dialoglib.dialog.entity.DialogMenuItem;
-import cc.sivin.dialoglib.dialog.listener.OnOperItemClickL;
+import cc.sivin.dialoglib.dialog.listener.SheetItemClickListener;
 import cc.sivin.dialoglib.dialog.utils.CornerUtils;
 import cc.sivin.dialoglib.dialog.widget.base.BaseDialog;
 
@@ -99,10 +99,10 @@ public class NormalListDialog extends BaseDialog {
      * operation items(操作items)
      */
     private ArrayList<DialogMenuItem> contents = new ArrayList<DialogMenuItem>();
-    private OnOperItemClickL onOperItemClickL;
+    private SheetItemClickListener onOperItemClickL;
     private LayoutAnimationController lac;
 
-    public void setOnOperItemClickL(OnOperItemClickL onOperItemClickL) {
+    public void setOnOperItemClickL(SheetItemClickListener onOperItemClickL) {
         this.onOperItemClickL = onOperItemClickL;
     }
 
@@ -171,7 +171,7 @@ public class NormalListDialog extends BaseDialog {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void setUiBeforShow() {
+    public void setUiBeforeShow() {
         /** title */
         float radius = dp2px(cornerRadius_DP);
         tv_title.setBackgroundDrawable(CornerUtils.cornerDrawable(titleBgColor, new float[]{radius, radius, radius,
@@ -201,7 +201,7 @@ public class NormalListDialog extends BaseDialog {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (onOperItemClickL != null) {
-                    onOperItemClickL.onOperItemClick(parent, view, position, id);
+                    onOperItemClickL.onItemClick(parent, view, position, id);
                 }
             }
         });

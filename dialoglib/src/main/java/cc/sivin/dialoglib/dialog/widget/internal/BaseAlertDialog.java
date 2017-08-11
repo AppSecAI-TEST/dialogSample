@@ -110,7 +110,7 @@ public abstract class BaseAlertDialog<T extends BaseAlertDialog<T>> extends Base
     }
 
     @Override
-    public void setUiBeforShow() {
+    public void setUiBeforeShow() {
         /** title */
         tv_title.setVisibility(isTitleShow ? View.VISIBLE : View.GONE);
 
